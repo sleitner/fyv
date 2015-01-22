@@ -17,6 +17,9 @@ def analytics(request):
 def testlogin(request):
     return render(request, 'testlogin.html')
 
+def input(request):
+    return render(request, 'input.html')
+
 def new_list(request):
     form = NewListForm(data=request.POST)
     if form.is_valid():
