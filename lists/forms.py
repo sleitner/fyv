@@ -11,11 +11,11 @@ class ItemForm(ModelForm):
         fields = ['firstname','lastname']
         widgets = {
              'firstname': TextInput(attrs={
-                 'placeholder': 'Enter voter\'s first name',
+                 'placeholder': 'first name',
                   'class': 'form-control input-lg'
              }),
              'lastname': TextInput(attrs={
-                 'placeholder': 'Enter voter\'s last name',
+                 'placeholder': 'last name',
                  'class': 'form-control input-lg'
              }),
          }
