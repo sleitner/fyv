@@ -1,0 +1,136 @@
+{% extends 'basenoj.html' %}
+
+{% block other_css %}
+    <link href="/static/nv.d3.css" rel="stylesheet" media="screen">
+{% endblock %}
+{% block header_text %}{% endblock %}
+{% block middle_text %}
+
+<h2>Analytics</h2> <p>
+_
+<p>
+
+
+<h4>Variables that were predictive of voting in 2012</h4> <p>
+By relating Census data to voter participation data at the zip code level, we can associate electorate properties with voting likelihood. The plot below shows how strongly variables from the 2008-2012 American Community Survey are predictive of voter participation in the Ohio 2012 general election.
+<p>
+Details available on request.
+
+
+<style>
+#chart svg {
+  height: 400px;
+}
+</style>
+<div id="chart">
+  <svg></svg>
+</div>
+
+{% endblock %}
+{% block form_action %}{% endblock %}
+{% block extra_content %}{% endblock %}
+{% block other_js %} 
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="/static/nv.d3.min.js"></script>
+<script>
+nv.addGraph(function() {
+  var chart = nv.models.discreteBarChart()
+      .x(function(d) { return d.label })    //Specify the data accessors.
+      .y(function(d) { return d.value })
+      .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+      .tooltips(false)        //Don't show tooltips
+      .showValues(true)       //...instead, show the bar value right on top of each bar.
+      .transitionDuration(350)
+      ;
+  chart.yAxis
+    .axisLabel('Relative predictive power') //should grab from coeffData key
+    .axisLabelDistance(40);
+
+  d3.select('#chart svg')
+      .datum(coeffData())
+      .call(chart);
+
+ /* chart.rotateLabels(-45)
+  chart.margin({bottom: 60});
+  var xTicks = d3.select('.nv-x.nv-axis > g').selectAll('g');
+  xTicks
+    .selectAll('text')
+    .attr('transform', function(d,i,j) { return 'translate (-10, 25) rotate(-90 0,0)' }) ;
+*/
+
+  nv.utils.windowResize(chart.update);
+
+  return chart;
+});
+
+//Each bar represents a single discrete quantity.
+function coeffData() {
+    return [
+        {
+        key: "Relative Coefficients",
+        values: [
+{"label" : "pop_tot", "value" : -0.087114 }
+,
+{"label" : "housing_medianval", "value" : 0.253063 }
+,
+{"label" : "household_income", "value" : 0.399524 }
+,
+{"label" : "household_size", "value" : -0.294706 }
+,
+{"label" : "household_single_percent", "value" : -0.167984 }
+,
+{"label" : "education_BAormore_percent", "value" : 0.152768 }
+,
+{"label" : "citizen_notusa_percent", "value" : -0.036418 }
+,
+{"label" : "language_english_percent", "value" : 0.127378 }
+,
+{"label" : "black_frac", "value" : 0.250262 }
+,
+{"label" : "housing_vacant_frac", "value" : -0.012364 }
+,
+{"label" : "commute_ptransit_frac", "value" : 0.037805 }
+,
+{"label" : "commute_car_frac", "value" : 0.005095 }
+,
+{"label" : "avg_age2014", "value" : 0.162022 }
+]
+        }
+      ]
+}
+</script>
+<p>
+<script>
+/*
+d3.json('/static/cumulativeLineData.json', function(data) {
+  nv.addGraph(function() {
+    var chart = nv.models.cumulativeLineChart()
+                  .x(function(d) { return d[0] })
+                  .y(function(d) { return d[1]/100 }) //adjusting, 100% is 1.00, not 100 as it is in the data
+                  .color(d3.scale.category10().range())
+                  .useInteractiveGuideline(true)
+                  ;
+
+     chart.xAxis
+        .tickValues([1078030800000,1122782400000,1167541200000,1251691200000])
+        .tickFormat(function(d) {
+            return d3.time.format('%x')(new Date(d))
+          });
+
+    chart.yAxis
+        .tickFormat(d3.format(',.1%'));
+
+    d3.select('#chart svg')
+        .datum(data)
+        .call(chart);
+
+    //TODO: Figure out a good way to do this automatically
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+});
+*/
+</script>
+{% endblock %}
+
