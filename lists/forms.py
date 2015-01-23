@@ -8,10 +8,14 @@ class ItemForm(ModelForm):
 
     class Meta:
         model = Person
-        fields = ['firstname','lastname']
+        fields = ['firstname','lastname','zipcode']
         widgets = {
              'firstname': TextInput(attrs={
                  'placeholder': 'first name',
+                  'class': 'form-control input-lg'
+             }),
+             'zipcode': TextInput(attrs={
+                 'placeholder': 'zip code',
                   'class': 'form-control input-lg'
              }),
              'lastname': TextInput(attrs={
@@ -21,9 +25,9 @@ class ItemForm(ModelForm):
          }
         error_messages = {
             'firstname': {'required': 'first name is currently required'},
-            'lastname': {'required': 'last name is required'}
+            'lastname': {'required': 'last name is required'},
+            'zipcode': {'required': 'zip code is required'}
         }
-#        Voter.object.create(firstname, lastname, byr=111)
 
 
 class NewListForm(ItemForm):
@@ -31,10 +35,13 @@ class NewListForm(ItemForm):
         if owner.is_authenticated():
             return List.create_new(item_firstname=self.cleaned_data['firstname'], 
                                    item_lastname=self.cleaned_data['lastname'],
+                                   item_zipcode=self.cleaned_data['zipcode'],
                                    owner=owner)
         else:
             return List.create_new(item_firstname=self.cleaned_data['firstname'], 
-                                   item_lastname=self.cleaned_data['lastname'])
+                                   item_lastname=self.cleaned_data['lastname'],
+                                   item_zipcode=self.cleaned_data['zipcode']
+                                   )
 
 class ExistingListItemForm(ItemForm):
     def __init__(self, for_list, *args, **kwargs):

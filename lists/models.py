@@ -20,10 +20,11 @@ class List(models.Model):
 
 
     @staticmethod
-    def create_new(item_firstname, item_lastname, owner=None):
+    def create_new(item_firstname, item_lastname, item_zipcode, owner=None):
         list_ = List.objects.create(owner=owner)
         Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
-        (cols,rows,p) = query(item_firstname, item_lastname)
+        # find_nearby_zips(item_zipcode)
+        (cols,rows,p) = query(item_firstname, item_lastname, item_zipcode)
         
         state = 'newyork'
         if state == 'ohio':
@@ -216,6 +217,7 @@ class Voter(models.Model):
 class Person(models.Model):
     firstname = models.CharField(default='', max_length=100)
     lastname = models.CharField(default='', max_length=100)
+    zipcode = models.IntegerField(default=None, null=True)
     list = models.ForeignKey(List, default=None)
 
     class Meta:

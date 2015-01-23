@@ -60,11 +60,13 @@
                   <div class="form-group">
                     {{ form.firstname }}<br>
                     {{ form.lastname }}<br>
+                    {{ form.zipcode }}<br>
                     {% csrf_token %}
                     {% if form.errors %}
                         <div class="form-group has-error">
                             <div class="help-block">{{ form.firstname.errors }}</div>
                             <div class="help-block">{{ form.lastname.errors }}</div>
+                            <div class="help-block">{{ form.zipcode.errors }}</div>
                         </div>
                     {% endif %}
                   </div><br>

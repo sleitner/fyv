@@ -42,7 +42,7 @@ def query_cols(c):
     cols = [c[0] for c in cols]  #unpack field title:
     return cols
 
-def query_display(c, firstname, lastname, zipcode='', state='newyork'):
+def query_display(c, firstname, lastname, zipcode, state='newyork'):
     if state == 'ohio':
         c.execute('''
         SELECT YEAR_OF_BIRTH, 
@@ -56,7 +56,7 @@ def query_display(c, firstname, lastname, zipcode='', state='newyork'):
         return (rows,[-1])
 
     elif( state == "newyork"):
-        zipcode = 14174
+        
         cols = query_cols(c)
         c.execute(''' SELECT * 
                   FROM voter_history.newyork 
@@ -70,13 +70,13 @@ def query_display(c, firstname, lastname, zipcode='', state='newyork'):
     else:
         return None
         
-def query(firstname, lastname):
+def query(firstname, lastname, zipcode = 14174):
 # todo: to prevent injection attacks, paramaters ('firstname') go into execute with 
 # implicit quotes around them; for strings that are NOT externally accessible 
 # inputs you should devise a template that 
 # gives more flexibility in handling parameters like state or the list of columns
     c = connections['votersdb'].cursor()
-    (cols,rows,p) = query_display(c, firstname, lastname)
+    (cols,rows,p) = query_display(c, firstname, lastname, zipcode)
     print(cols)
     print(rows)
     print(p)
