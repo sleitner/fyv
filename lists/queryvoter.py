@@ -1,4 +1,5 @@
 from django.db import connections
+import numpy as np
 
 #todo: this could be a class of staticmethods?
 def dictfetchall(c):
@@ -14,7 +15,34 @@ def search_replace(rows, search='', replace=" :/ "):
         return [[ el if el!=search else replace for el in row] for row in rows]
 
 
-def query_display(c, firstname, lastname, state='ohio'):
+def sigmoid(alpha):
+    return 1/(1. + np.exp(-alpha))
+
+def model(c, rows, state='newyork', mtype='logistic'):
+    table_name =state+"_"+mtype
+    c.execute("SELECT * FROM voter_history.newyork_logistic")
+    result = c.fetchall()
+    thetas = result[0]
+    thetas = [theta for theta in thetas]  #unpack
+    bias = thetas.pop()
+    fe_i = result[1]
+    fe_i = [int(i) for i in fe_i]  #unpack
+    fe_i.pop()
+    
+    prob = np.zeros(len(rows))
+    for i, row in enumerate(rows): 
+        alpha = np.sum( np.asarray(row)[fe_i] * np.asarray(thetas)) + bias 
+        prob[i] = sigmoid(alpha)
+    return prob
+
+
+def query_cols(c):
+    c.execute("show fields from voter_history.newyork")
+    cols = c.fetchall()
+    cols = [c[0] for c in cols]  #unpack field title:
+    return cols
+
+def query_display(c, firstname, lastname, zipcode='', state='newyork'):
     if state == 'ohio':
         c.execute('''
         SELECT YEAR_OF_BIRTH, 
@@ -29,20 +57,27 @@ def query_display(c, firstname, lastname, state='ohio'):
 
     elif( state == "newyork"):
         zipcode = 14174
-        c.execute('''
-        SELECT lastname, firstname, middlename, city, zip, DOB, gender, lastvote, regdate, G2014, G2012, G2010 
-        FROM voter_history.newyork 
-        WHERE FIRST_NAME=%s AND LAST_NAME=%s AND ZIP=%s LIMIT 1000;
-        ''', [firstname, lastname, zipcode]) 
-        rows = (c.fetchall(),[-1])
+        cols = query_cols(c)
+        c.execute(''' SELECT * 
+                  FROM voter_history.newyork 
+                  WHERE firstname=%s AND lastname=%s AND zip=%s LIMIT 1000;
+                  ''', [firstname, lastname, zipcode]) 
+        rows = c.fetchall()
+        p = model(c, rows)
+        rows = [i for i in np.asarray(rows)]  #unpack 
+        return (cols, rows, p)
+
     else:
         return None
         
 def query(firstname, lastname):
-# todo: to prevent injection attacks, paramters go into execute with quotes around them
-# for strings that are NOT externally accessible inputs you should devise a template that 
+# todo: to prevent injection attacks, paramaters ('firstname') go into execute with 
+# implicit quotes around them; for strings that are NOT externally accessible 
+# inputs you should devise a template that 
 # gives more flexibility in handling parameters like state or the list of columns
     c = connections['votersdb'].cursor()
-    (rows,id) = query_display(c, firstname, lastname)
-    #    p = query_prediction(c, firstname, lastname)
-    return rows
+    (cols,rows,p) = query_display(c, firstname, lastname)
+    print(cols)
+    print(rows)
+    print(p)
+    return (cols,rows,p) 

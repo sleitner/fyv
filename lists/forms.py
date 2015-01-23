@@ -29,12 +29,12 @@ class ItemForm(ModelForm):
 class NewListForm(ItemForm):
     def save(self, owner):
         if owner.is_authenticated():
-            return List.create_new(first_item_firstname=self.cleaned_data['firstname'], 
-                                   first_item_lastname=self.cleaned_data['lastname'],
+            return List.create_new(item_firstname=self.cleaned_data['firstname'], 
+                                   item_lastname=self.cleaned_data['lastname'],
                                    owner=owner)
         else:
-            return List.create_new(first_item_firstname=self.cleaned_data['firstname'], 
-                                   first_item_lastname=self.cleaned_data['lastname'])
+            return List.create_new(item_firstname=self.cleaned_data['firstname'], 
+                                   item_lastname=self.cleaned_data['lastname'])
 
 class ExistingListItemForm(ItemForm):
     def __init__(self, for_list, *args, **kwargs):

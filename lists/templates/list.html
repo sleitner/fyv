@@ -11,48 +11,25 @@
       <tr> 
         <th>#</th>
         <th> first name </th>
+        <th> middle name </th>
         <th> last name </th>
-        <th> birth year </th>
-        <th> general election: 11/05/2013 </th> 
-        <th> 11/06/2012 </th>
-        <th> 11/08/2011 </th>
-        <th> 11/02/2010 </th>
-        <th> 11/03/2009 </th>
-        <th> 11/18/2008 </th>
-        <th> 11/04/2008 </th>
-        <th> 12/11/2007 </th>
-        <th> 11/06/2007 </th>
-        <th> 11/07/2006 </th>
-        <th> 11/08/2005* </th>
-        <th> 11/02/2004* </th>
-        <th> 11/04/2003* </th>
-        <th> 11/05/2002* </th>
-        <th> 11/06/2001* </th>
-        <th> 11/07/2000* </th>
-        <th> </th>
+        <th> birth date </th>
+        <th> zip code </th>
+        <th> voting likelihood </th>
+        <th> general election 2014 </th> 
+        <th> last vote date </th> 
         {% for voter in list.voter_set.all %}
             <tr>
               <td> {{ forloop.counter }} </td> 
               <td> {{ voter.firstname }} </td>
+              <td> {{ voter.middlename }} </td>
               <td> {{ voter.lastname }} </td>
-              <td> {{ voter.byr }} </td>
-              <td> {{ voter.GENERAL11052013 }} </td>
-              <td> {{ voter.GENERAL11062012 }} </td>
-              <td> {{ voter.GENERAL11082011 }} </td>
-              <td> {{ voter.GENERAL11022010 }} </td>
-              <td> {{ voter.GENERAL11032009 }} </td>
-              <td> {{ voter.GENERAL11182008 }} </td>
-              <td> {{ voter.GENERAL11042008 }} </td>
-              <td> {{ voter.GENERAL12112007 }} </td>
-              <td> {{ voter.GENERAL11062007 }} </td>
-              <td> {{ voter.GENERAL11072006 }} </td>
-              <td> {{ voter.GENERAL11082005 }} </td>
-              <td> {{ voter.GENERAL11022004 }} </td>
-              <td> {{ voter.GENERAL11042003 }} </td>
-              <td> {{ voter.GENERAL11052002 }} </td>
-              <td> {{ voter.GENERAL11062001 }} </td>
-              <td> {{ voter.GENERAL11072000 }} </td>
-            </td></tr>
+              <td> {{ voter.DOB }} </td>
+              <td> {{ voter.zip }} </td>
+              <td> {{ voter.prob }} </td>
+              <td> {{ voter.G2014 }} </td>
+              <td> {{ voter.lastvote }} </td>
+            </tr>
         {% endfor %}
     </table>
 
