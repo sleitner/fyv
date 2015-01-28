@@ -40,8 +40,6 @@ from lists.models import List
 def new_member_list(request):
     context = {}
     twitter_friends_list =  get_twitter_friends(request)
-    if request.user:
-        print('!!!s!!!!!')
     if not request.user.is_authenticated():
         return render(request, 'home.html')
     print(twitter_friends_list)
@@ -54,7 +52,7 @@ def new_member_list(request):
 #    list_ = form.save(owner=request.user)
 #    return redirect(list_)
     #return render(request, template, context)
-    return redirect('home.html')
+    return redirect('/')
 
 def logout_view(request):
     auth_logout(request)
