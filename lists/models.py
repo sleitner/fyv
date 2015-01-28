@@ -5,10 +5,10 @@ from lists.queryvoter import query
 from lists.queryvoter import query_cols
 
 class List(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-    shared_with = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name='shared_lists'
-    )
+    #owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+#    shared_with = models.ManyToManyField(
+#        settings.AUTH_USER_MODEL, related_name='shared_lists'
+#    )
 
     def get_absolute_url(self):
         return reverse('view_list', args=[self.id])
@@ -18,8 +18,8 @@ class List(models.Model):
         return self.item_set.first().lastname
 
     @staticmethod
-    def create_new(item_firstname, item_lastname, item_zipcode, owner=None):
-        list_ = List.objects.create(owner=owner)
+    def create_new(item_firstname, item_lastname, item_zipcode):
+        list_ = List.objects.create()
         Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
         # find_nearby_zips(item_zipcode)
         (cols,rows,p) = query(item_firstname, item_lastname, item_zipcode)

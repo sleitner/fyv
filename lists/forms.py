@@ -32,27 +32,9 @@ class ItemForm(ModelForm):
 
 class NewListForm(ItemForm):
     def save(self, owner):
-        if owner.is_authenticated():
-            return List.create_new(item_firstname=self.cleaned_data['firstname'], 
-                                   item_lastname=self.cleaned_data['lastname'],
-                                   item_zipcode=self.cleaned_data['zipcode'],
-                                   owner=owner)
-        else:
-            return List.create_new(item_firstname=self.cleaned_data['firstname'], 
-                                   item_lastname=self.cleaned_data['lastname'],
-                                   item_zipcode=self.cleaned_data['zipcode']
-                                   )
+        return List.create_new(item_firstname=self.cleaned_data['firstname'], 
+                               item_lastname=self.cleaned_data['lastname'],
+                               item_zipcode=self.cleaned_data['zipcode']
+                               )
 
-class ExistingListItemForm(ItemForm):
-    def __init__(self, for_list, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.instance.list = for_list
-
-        
-    # def validate_unique(self):
-    #     try:
-    #         self.instance.validate_unique()
-    #     except ValidationError as e:
-    #         e.error_dict = {'text': ["You've already got this in your list"]}
-    #         self._update_errors(e)
 

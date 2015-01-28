@@ -14,7 +14,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
 #########################################
 LOGIN_REDIRECT_URL = '/members'
 LOGIN_ERROR_URL = '/login-error'
@@ -44,13 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 #    'social.apps.django_app.default',
     'lists',
-    'accounts',
     'functional_tests',
-)
-
-AUTH_USER_MODEL = 'accounts.User'
-AUTHENTICATION_BACKENDS = (
-    'accounts.authentication.PersonaAuthenticationBackend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,10 +77,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'superlists', 'static'),
 )
@@ -105,13 +96,9 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
         },
-        'accounts': {
-            'handlers': ['console'],
-        },
         'lists': {
             'handlers': ['console'],
         },
     },
     'root': {'level': 'INFO'},
 }
-
