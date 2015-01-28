@@ -14,13 +14,13 @@ class ItemForm(ModelForm):
                  'placeholder': 'first name',
                   'class': 'form-control input-lg'
              }),
-             'zipcode': TextInput(attrs={
-                 'placeholder': 'zip code',
-                  'class': 'form-control input-lg'
-             }),
              'lastname': TextInput(attrs={
                  'placeholder': 'last name',
                  'class': 'form-control input-lg'
+             }),
+             'zipcode': TextInput(attrs={
+                 'placeholder': 'zip code',
+                  'class': 'form-control input-lg'
              }),
          }
         error_messages = {
