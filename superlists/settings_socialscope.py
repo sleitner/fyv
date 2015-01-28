@@ -28,4 +28,3 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details'
 )
-#    'thirdauth.save_profile',  # <--- set the import-path to the function

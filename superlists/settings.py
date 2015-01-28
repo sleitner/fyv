@@ -15,14 +15,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 #########################################
-LOGIN_REDIRECT_URL = '/members'
-LOGIN_ERROR_URL = '/login-error'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = 'login_error'
 # SECURITY WARNING: keep the secret key used in production secret!
 #for private passwords and authentication outside of VCS
 from superlists.settings_local import * 
 #-------------
 from superlists.settings_socialscope import * 
 #-----------------
+AUTHENTICATION_BACKENDS = (
+   'social.backends.facebook.FacebookOAuth2',
+   'social.backends.google.GoogleOAuth2',
+   'social.backends.twitter.TwitterOAuth',
+   'social.backends.linkedin.LinkedinOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+)
 #########################################
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -41,9 +48,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'social.apps.django_app.default',
+    'social.apps.django_app.default',
+    'superlists',
     'lists',
     'functional_tests',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +72,7 @@ WSGI_APPLICATION = 'superlists.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+#AUTH_USER_MODEL = 'lists.CustomUser'
 from superlists.settings_databaselocal import * 
 #from superlists.settings_databaseaws import * 
 

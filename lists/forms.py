@@ -31,7 +31,7 @@ class ItemForm(ModelForm):
 
 
 class NewListForm(ItemForm):
-    def save(self, owner):
+    def save(self, owner=''):
         return List.create_new(item_firstname=self.cleaned_data['firstname'], 
                                item_lastname=self.cleaned_data['lastname'],
                                item_zipcode=self.cleaned_data['zipcode']

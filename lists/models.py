@@ -5,17 +5,8 @@ from lists.queryvoter import query
 from lists.queryvoter import query_cols
 
 class List(models.Model):
-    #owner = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
-#    shared_with = models.ManyToManyField(
-#        settings.AUTH_USER_MODEL, related_name='shared_lists'
-#    )
-
     def get_absolute_url(self):
         return reverse('view_list', args=[self.id])
-
-    @property
-    def name(self):
-        return self.item_set.first().lastname
 
     @staticmethod
     def create_new(item_firstname, item_lastname, item_zipcode):
@@ -122,10 +113,21 @@ class List(models.Model):
             
         return list_
 
+##########################################################
+class Person(models.Model):
+    firstname = models.CharField(default='', max_length=100)
+    lastname = models.CharField(default='', max_length=100)
+    zipcode = models.IntegerField(default=None, null=True)
+    list = models.ForeignKey(List, default=None)
+
+    class Meta:
+        ordering = ('id',)
+       # unique_together = ('list', 'firstname')
+
+    def __str__(self):
+        return self.lastname
+
 class Voter(models.Model):
-    #cols = query_cols()
-    #print(cols)
-  
     lastname = models.CharField(default='', max_length=100, null=True)
     firstname = models.CharField(default='', max_length=100, null=True)
     middlename = models.CharField(default='', max_length=100, null=True)
@@ -190,6 +192,7 @@ class Voter(models.Model):
     G2014 = models.IntegerField(default='0')
     nyid = models.IntegerField(default='0')
     prob = models.FloatField(default='-1.0')
+    # ohio
 #    firstname = models.CharField(default='', max_length=100)
 #    lastname = models.CharField(default='', max_length=100)
 #    byr = models.IntegerField(default='0')
@@ -211,18 +214,4 @@ class Voter(models.Model):
 #    GENERAL11052013=models.CharField(default='', max_length=10)
     list = models.ForeignKey(List, default=None)
 #    person = models.ForeignKey(Person, default=None)
-
-class Person(models.Model):
-    firstname = models.CharField(default='', max_length=100)
-    lastname = models.CharField(default='', max_length=100)
-    zipcode = models.IntegerField(default=None, null=True)
-    list = models.ForeignKey(List, default=None)
-
-    class Meta:
-        ordering = ('id',)
-       # unique_together = ('list', 'firstname')
-
-
-    def __str__(self):
-        return self.lastname
 
