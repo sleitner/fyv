@@ -42,17 +42,14 @@ def new_member_list(request):
     twitter_friends_list =  get_twitter_friends(request)
     if not request.user.is_authenticated():
         return render(request, 'home.html')
-    print(twitter_friends_list)
-    #context = {'twitter_friends_list': get_twitter_friends(request)}
-    #template = 'members.html'
-    
-#    List.create_new(item_firstname=twitter_friend['firstname'],
-#                    item_lastname=twitter_friend['lastname'],
-#                    )
-#    list_ = form.save(owner=request.user)
-#    return redirect(list_)
-    #return render(request, template, context)
-    return redirect('/')
+    list_ = ''
+    for tfriend in twitter_friends_list:
+        list_ = List.create_new_twittNY(item_firstname=tfriend['firstname'],
+                                item_lastname=tfriend['lastname'],
+                                item_zipcode='', 
+                                list_=list_
+                                )
+    return render(request, 'list.html', {'list': list_})
 
 def logout_view(request):
     auth_logout(request)

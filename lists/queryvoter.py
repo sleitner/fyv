@@ -31,7 +31,7 @@ def model(c, rows, state='newyork', mtype='logistic'):
     
     prob = np.zeros(len(rows))
     for i, row in enumerate(rows): 
-        alpha = np.sum( np.asarray(row)[fe_i] * np.asarray(thetas)) + bias 
+        alpha = np.sum( (np.asarray(row)[fe_i]).astype(float) * np.asarray(thetas)) + bias 
         prob[i] = sigmoid(alpha)
     return prob
 
@@ -58,26 +58,29 @@ def query_display(c, firstname, lastname, zipcode, state='newyork'):
     elif( state == "newyork"):
         
         cols = query_cols(c)
-        c.execute(''' SELECT * 
+        if zipcode:
+            c.execute(''' SELECT * 
                   FROM voter_history.newyork 
                   WHERE firstname=%s AND lastname=%s AND zip=%s LIMIT 1000;
                   ''', [firstname, lastname, zipcode]) 
+        else:
+            c.execute(''' SELECT * 
+                  FROM voter_history.newyork 
+                  WHERE firstname=%s AND lastname=%s LIMIT 1000;
+                  ''', [firstname, lastname]) 
         rows = c.fetchall()
-        p = model(c, rows)
         rows = [i for i in np.asarray(rows)]  #unpack 
+        p = model(c, rows)
         return (cols, rows, p)
 
     else:
         return None
         
-def query(firstname, lastname, zipcode = 14174):
+def query(firstname, lastname, zipcode):
 # todo: to prevent injection attacks, paramaters ('firstname') go into execute with 
 # implicit quotes around them; for strings that are NOT externally accessible 
 # inputs you should devise a template that 
 # gives more flexibility in handling parameters like state or the list of columns
     c = connections['votersdb'].cursor()
     (cols,rows,p) = query_display(c, firstname, lastname, zipcode)
-    print(cols)
-    print(rows)
-    print(p)
     return (cols,rows,p) 

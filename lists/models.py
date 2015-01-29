@@ -9,7 +9,87 @@ class List(models.Model):
         return reverse('view_list', args=[self.id])
 
     @staticmethod
-    def create_new(item_firstname, item_lastname, item_zipcode):
+    def create_new_twittNY(item_firstname, item_lastname, item_zipcode='', list_=''):
+        if not list_:
+            list_ = List.objects.create()
+            Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
+        # find_nearby_zips(item_zipcode)
+        (cols,rows,p) = query(item_firstname, item_lastname, item_zipcode)
+        print(rows)
+        for i,row in enumerate(rows):
+            d = dict(zip(cols,row))
+            # these could be extracted from the dictionary version with a **
+            print(i)
+            Voter.objects.create(
+                    lastname = d['lastname'],
+                    firstname = d['firstname'],
+                    middlename = d['middlename'],
+                    suffix = d['suffix'],
+                    city = d['city'],
+                    zip = d['zip'],
+                    zip4 = d['zip4'],
+                    DOB = d['DOB'],
+                    gender = d['gender'],
+                    party = d['party'],
+                    countycode = d['countycode'],
+                    legdistrict = d['legdistrict'],
+                    towncity = d['towncity'],
+                    ward = d['ward'],
+                    congressdistrict = d['congressdistrict'],
+                    lastvote = d['lastvote'],
+                    regdate = d['regdate'],
+                    P1993 = d['P1993'],
+                    P1994 = d['P1994'],
+                    P1995 = d['P1995'],
+                    P1996 = d['P1996'],
+                    P1997 = d['P1997'],
+                    P1998 = d['P1998'],
+                    P1999 = d['P1999'],
+                    P2000 = d['P2000'],
+                    P2001 = d['P2001'],
+                    P2002 = d['P2002'],
+                    P2003 = d['P2003'],
+                    P2004 = d['P2004'],
+                    P2005 = d['P2005'],
+                    P2006 = d['P2006'],
+                    P2007 = d['P2007'],
+                    P2008 = d['P2008'],
+                    P2009 = d['P2009'],
+                    P2010 = d['P2010'],
+                    P2011 = d['P2011'],
+                    P2012 = d['P2012'],
+                    P2013 = d['P2013'],
+                    P2014 = d['P2014'],
+                    G1992 = d['G1992'],
+                    G1993 = d['G1993'],
+                    G1994 = d['G1994'],
+                    G1995 = d['G1995'],
+                    G1996 = d['G1996'],
+                    G1997 = d['G1997'],
+                    G1998 = d['G1998'],
+                    G1999 = d['G1999'],
+                    G2000 = d['G2000'],
+                    G2001 = d['G2001'],
+                    G2002 = d['G2002'],
+                    G2003 = d['G2003'],
+                    G2004 = d['G2004'],
+                    G2005 = d['G2005'],
+                    G2006 = d['G2006'],
+                    G2007 = d['G2007'],
+                    G2008 = d['G2008'],
+                    G2009 = d['G2009'],
+                    G2010 = d['G2010'],
+                    G2011 = d['G2011'],
+                    G2012 = d['G2012'],
+                    G2013 = d['G2013'],
+                    G2014 = d['G2014'],
+                    nyid = d['nyid'],
+                    prob=p[i],
+                    list=list_)
+        return list_
+
+    @staticmethod
+    def create_new(item_firstname, item_lastname, item_zipcode=''):
         list_ = List.objects.create()
         Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
         # find_nearby_zips(item_zipcode)
