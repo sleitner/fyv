@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='List',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
             ],
             options={
             },
@@ -22,11 +22,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Person',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
-                ('firstname', models.CharField(default='', max_length=100)),
-                ('lastname', models.CharField(default='', max_length=100)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('firstname', models.CharField(max_length=100, default='')),
+                ('lastname', models.CharField(max_length=100, default='')),
                 ('zipcode', models.IntegerField(default=None, null=True)),
-                ('list', models.ForeignKey(default=None, to='lists.List')),
+                ('list', models.ForeignKey(to='lists.List', default=None)),
             ],
             options={
                 'ordering': ('id',),
@@ -36,20 +36,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Voter',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
-                ('lastname', models.CharField(default='', null=True, max_length=100)),
-                ('firstname', models.CharField(default='', null=True, max_length=100)),
-                ('middlename', models.CharField(default='', null=True, max_length=100)),
-                ('suffix', models.CharField(default='', null=True, max_length=3)),
-                ('city', models.CharField(default='', null=True, max_length=100)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('lastname', models.CharField(max_length=100, default='', null=True)),
+                ('firstname', models.CharField(max_length=100, default='', null=True)),
+                ('middlename', models.CharField(max_length=100, default='', null=True)),
+                ('suffix', models.CharField(max_length=3, default='', null=True)),
+                ('city', models.CharField(max_length=100, default='', null=True)),
                 ('zip', models.IntegerField(default='0', null=True)),
                 ('zip4', models.IntegerField(default='0', null=True)),
                 ('DOB', models.IntegerField(default='0', null=True)),
-                ('gender', models.CharField(default='', max_length=3)),
-                ('party', models.CharField(default='', max_length=100)),
+                ('gender', models.CharField(max_length=3, default='')),
+                ('party', models.CharField(max_length=100, default='')),
                 ('countycode', models.IntegerField(default='0', null=True)),
                 ('legdistrict', models.IntegerField(default='0', null=True)),
-                ('towncity', models.CharField(default='', null=True, max_length=100)),
+                ('towncity', models.CharField(max_length=100, default='', null=True)),
                 ('ward', models.IntegerField(default='0', null=True)),
                 ('congressdistrict', models.IntegerField(default='0', null=True)),
                 ('lastvote', models.IntegerField(default='0', null=True)),
@@ -101,7 +101,7 @@ class Migration(migrations.Migration):
                 ('G2014', models.IntegerField(default='0')),
                 ('nyid', models.IntegerField(default='0')),
                 ('prob', models.FloatField(default='-1.0')),
-                ('list', models.ForeignKey(default=None, to='lists.List')),
+                ('list', models.ForeignKey(to='lists.List', default=None)),
             ],
             options={
             },

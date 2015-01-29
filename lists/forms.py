@@ -19,14 +19,14 @@ class ItemForm(ModelForm):
                  'class': 'form-control input-lg'
              }),
              'zipcode': TextInput(attrs={
-                 'placeholder': 'zip code',
+                 'placeholder': 'optional zip code',
                   'class': 'form-control input-lg'
              }),
          }
         error_messages = {
-            'firstname': {'required': 'first name is currently required'},
+            'firstname': {'required': 'first name is required'},
             'lastname': {'required': 'last name is required'},
-            'zipcode': {'required': 'zip code is required'}
+            #'zipcode': {'required': 'zip code fffis required'}
         }
 
 
