@@ -13,6 +13,7 @@ class List(models.Model):
         if not list_:
             list_ = List.objects.create()
             Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
+            #this should be the username 
         # find_nearby_zips(item_zipcode)
         (cols,rows,p) = query(item_firstname, item_lastname, item_zipcode)
         print(rows)

@@ -45,6 +45,7 @@
 <p><br><p><br>
     <!-- # this is the container for the form -->
 
+
       <div class="row marketing">
         <div class="col-lg-6">
                 <h2>{% block header_text %}{% endblock %}</h2>
@@ -71,10 +72,12 @@
           {% if user and not user.is_anonymous %}
              {% load staticfiles %}
              <a href="/new_member_list">
-               <h2>See voters in your network</h2>
-               <img border="0" alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
+               <h2>See your New York network</h2>
+               <br>
+               <img alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
+              <!-- <img border="0" alt="friends list" src="/static/voter.jpg" width="300" ><br> this works fine on the server-->
              </a>
-               <p><p>
+               <p><br><p>
                   <a href="logout_view">Logout {{user.username }}</a>
 <!--               <img border="0" alt="friends list" src="{% static "designfordemocracy1.jpg" %}" width="150" > 
   -->
@@ -86,8 +89,8 @@
              </a>
           {% endif %}
         </div>
-      </div>
       {% endblock %}
+      </div>
 <p><br><p>
     <!-- this is the results table or just a bar -->
     <div class="row">
@@ -116,9 +119,11 @@
 <!-- console complains about this; ignore it: -->
 <script src="http://code.jquery.com/jquery.min.js"></script> 
 <script src="/static/list.js"></script>
+<!--
 <div id="fb-root"></div>
 <script src="/static/fblogin.js"></script>
 <script src="/static/fb.js"></script>
+-->
 </body>
 
 </html>
