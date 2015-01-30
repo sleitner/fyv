@@ -197,7 +197,6 @@ class List(models.Model):
 class Person(models.Model):
     firstname = models.CharField(default='', max_length=100)
     lastname = models.CharField(default='', max_length=100)
- #   zipcode = models.CharField(default=None, max_length=100)
     zipcode = models.IntegerField(default=None, null=True)
     list = models.ForeignKey(List, default=None)
 

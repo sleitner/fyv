@@ -1,11 +1,12 @@
+from django import forms
 from django.forms import ModelForm
-from django.forms.fields import TextInput
+from django.forms.fields import TextInput, NumberInput
 from django.core.exceptions import ValidationError
 
 from lists.models import Person, Voter, List
 
 class ItemForm(ModelForm):
-
+    #zipcode = forms.IntegerField(required=False)
     class Meta:
         model = Person
         fields = ['firstname','lastname','zipcode']
@@ -26,7 +27,7 @@ class ItemForm(ModelForm):
         error_messages = {
             'firstname': {'required': 'first name is required'},
             'lastname': {'required': 'last name is required'},
-            #'zipcode': {'required': 'zip code fffis required'}
+            'zipcode': {'required': 'zip code is required'}
         }
 
 
