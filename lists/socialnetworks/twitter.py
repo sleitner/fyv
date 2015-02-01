@@ -35,6 +35,8 @@ def authenticate_twitter(request):
 
 def get_twitter_friends(request):
     authid = authenticate_twitter(request)
+    # here you should check models to see if you already have an entry for this username in models!
+    # You only get to hit the API 15x per person per 15 minutes and 30x for the app
     api = tweepy.API(authid)
     # Iterate through all of the authenticated user's friends
     #http://tweepy.readthedocs.org/en/v3.1.0/code_snippet.html

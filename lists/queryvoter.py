@@ -33,7 +33,7 @@ def model(c, rows, state='newyork', mtype='logistic'):
     for i, row in enumerate(rows): 
         alpha = np.sum( (np.asarray(row)[fe_i]).astype(float) * np.asarray(thetas)) + bias 
         prob[i] = sigmoid(alpha)
-    return prob
+    return prob*100
 
 
 def query_cols(c):
