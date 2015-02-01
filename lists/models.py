@@ -17,11 +17,11 @@ class List(models.Model):
     @staticmethod
     def create_ny_voter(d,prob,list_):
             Voter.objects.create(
-                    lastname = d['lastname'],
-                    firstname = d['firstname'],
-                    middlename = d['middlename'],
+                    lastname = (d['lastname'] or '').title(),
+                    firstname = (d['firstname'] or '').title(),
+                    middlename = (d['middlename'] or '').title(),
                     suffix = d['suffix'],
-                    city = d['city'],
+                    city = (d['city'] or '').title(),
                     zip = d['zip'],
                     zip4 = d['zip4'],
                     DOB = date8dig_to_string(d['DOB']),
@@ -29,7 +29,7 @@ class List(models.Model):
                     party = d['party'],
                     countycode = d['countycode'],
                     legdistrict = d['legdistrict'],
-                    towncity = d['towncity'],
+                    towncity = (d['towncity'] or '').title(),
                     ward = d['ward'],
                     congressdistrict = d['congressdistrict'],
                     lastvote = date8dig_to_string(d['lastvote']),

@@ -30,15 +30,6 @@
               <li><a href="http://www.friendyourvote.com/FAQ.html">FAQ</a></li>  
               <li><a href="http://www.samleitner.com">Author</a></li>
           </ul>
-<!--
-             {% if user and not user.is_anonymous %}
-                <span class="navbar-text navbar-right">
-                  <a href="logout_view">Logout {{user.username }}</a>
-                </span>
-              {% else %}
-                <a class="btn navbar-btn navbar-right" id="id_login" href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Twitter login</a>
-              {% endif %}
--->
         </div><!--/.nav-collapse -->
     </nav>
 <p><br><p><br>
@@ -61,7 +52,8 @@
                             <div class="help-block">{{ form.zipcode.errors }}</div>
                         </div>
                     {% endif %}
-                  </div><br>
+                  </div>
+                  <br><p><br>
                 <button type="submit" class="btn btn-default">Submit</button>
                 </form>
         </div>
@@ -70,14 +62,12 @@
              {% load staticfiles %}
              <a href="/new_member_list">
                <h2>See your New York network</h2>
-               <br>
                <img alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
               <!-- <img border="0" alt="friends list" src="/static/voter.jpg" width="300" ><br> this works fine on the server-->
              </a>
                <p><br><p>
+                <button type="danger" class="btn btn-default"></button>
                   <a href="logout_view">Logout {{user.username }}</a>
-<!--               <img border="0" alt="friends list" src="{% static "designfordemocracy1.jpg" %}" width="150" > 
-  -->
           {% else %}
              <p><br><p><br><p><br><p><br>
              {% load staticfiles %}
@@ -113,14 +103,8 @@
 <!-- <a href="http://www.friendyourvote.com/testlogin.html">testlogin</a> -->
               
 </div>
-<!-- console complains about this; ignore it: -->
 <script src="http://code.jquery.com/jquery.min.js"></script> 
 <script src="/static/list.js"></script>
-<!--
-<div id="fb-root"></div>
-<script src="/static/fblogin.js"></script>
-<script src="/static/fb.js"></script>
--->
 </body>
 
 </html>
