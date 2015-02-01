@@ -9,29 +9,26 @@
 {% block table %}
     <table id="id_list_table" class="table table-hover table-bordered table-striped">
       <tr> 
-        <th>#</th>
-        <th> first name </th>
-        <th> middle name </th>
-        <th> last name </th>
+<!--         <th>#</th> -->
+        <th> voting likelihood </th>
+        <th> name </th>
         <th> birth date </th>
         <th> zip code </th>
-        <th> voting likelihood </th>
         <th> general election 2014 </th> 
         <th> last vote date </th> 
+        <th> tweet </th> 
         {% for voter in list.voter_set.all %}
-            <tr>
-              <td> {{ forloop.counter }} </td> 
-              <td> {{ voter.firstname }} </td>
-              <td> {{ voter.middlename }} </td>
-              <td> {{ voter.lastname }} </td>
+            <tr bgcolor=rgb(256,256,{{voter.prob|floatformat:"0"}})>
+              <!--<td> {{ forloop.counter }} </td> -->
+              <td> {{ voter.prob|floatformat:"0"  }}% </td>
+              <td> {{ voter.firstname }} {{ voter.middlename }} {{ voter.lastname }}</td> 
               <td> {{ voter.DOB }} </td>
               <td> {{ voter.zip }} </td>
-              <td> {{ voter.prob }} </td>
               <td> {{ voter.G2014 }} </td>
               <td> {{ voter.lastvote }} </td>
-              <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20" class="twitter-hashtag-button" data-size="large" data-related="SamNLeitner">Tweet #friendyourvote</a>
+<!--              <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20" class="twitter-hashtag-button" data-size="large" data-related="SamNLeitner">Tweet #friendyourvote</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              </td>
+              </td>-->
             </tr>
         {% endfor %}
     </table>
