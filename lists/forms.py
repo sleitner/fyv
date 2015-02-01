@@ -6,10 +6,11 @@ from django.core.exceptions import ValidationError
 from lists.models import Person, Voter, List
 
 class ItemForm(ModelForm):
-    #zipcode = forms.IntegerField(required=False)
+    zipcode = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': '[optional zip code]', 'class': 'form-control input-lg'}),required = False )
+
     class Meta:
         model = Person
-        fields = ['firstname','lastname','zipcode']
+        fields = ['firstname','lastname']
         widgets = {
              'firstname': TextInput(attrs={
                  'placeholder': 'first name',
@@ -19,15 +20,10 @@ class ItemForm(ModelForm):
                  'placeholder': 'last name',
                  'class': 'form-control input-lg'
              }),
-             'zipcode': TextInput(attrs={
-                 'placeholder': 'optional zip code',
-                  'class': 'form-control input-lg'
-             }),
          }
         error_messages = {
             'firstname': {'required': 'first name is required'},
             'lastname': {'required': 'last name is required'},
-            'zipcode': {'required': 'zip code is required'}
         }
 
 
