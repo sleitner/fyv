@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
-{% block header_text %}{% endblock %}
+{% block header_text %}
+{% endblock %}
 
 {% block list_form %}<a href="/">new search</a>{% endblock %}
 
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
 
 {% block table %}
-    <table id="id_list_table" class="table table-hover table-bordered ">
-      <tr> 
-<!--         <th>#</th> -->
-        <th> voting likelihood </th>
-        <th> name </th>
-        <th> location </th>
-        <th> birth date </th>
-        <th> voting history </th> 
-        <th> tweet </th> 
+<br>
+<table id="id_list_table" class="table table-hover table-bordered ">
+      <thead>
+        <tr> 
+          <th> voting likelihood </th>
+          <th> name </th>
+          <th> location </th>
+          <th> birth date </th>
+          <th> voting history </th> 
+          <th> tweet </th> 
+        </tr>
+      </thead>
+      <tbody>
         {% for voter in list.voter_set.all %}
-          <!-- <tr bgcolor=rgb(0,0,{{voter.prob|floatformat:"0"}})> -->
           {% if voter.prob > 90 %}
           <tr class="success">
           {% elif voter.prob > 75 %}
@@ -36,23 +40,23 @@
            {% endif %}
            <td> {{ voter.city }}, NY {{ voter.zip }} </td>
            <td> {{ voter.DOB }} </td>
-           <td> {{ voter.G2014 }}, {{ voter.G2012 }}, {{ voter.G2010 }}, {{ voter.G2008 }}
-           </td>
-   <!--       <td> {{ voter.lastvote }} </td> -->
-           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20" class="twitter-hashtag-button" data-related="SamNLeitner">Tweet #friendyourvote</a>
+           <td> {{ voter.G2014 }}, {{ voter.G2012 }}, {{ voter.G2010 }}, {{ voter.G2008 }}</td>
+           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20"  data-related="SamNLeitner">Tweet #friendyourvote</a> <!--class="twitter-hashtag-button"-->
            </td>
 
           </tr>
         {% endfor %}
              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </tbody>
     </table>
 
     {% if list.owner %}
         <p>List owner: <span id="id_list_owner">{{ list.owner.email }}</span><p>
     {% endif %}
 {% endblock %}
-{% block extra_content %}
 
+{% block extra_content %}
+<!--
 <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -112,8 +116,6 @@
          </tr>
         </tbody>
     </table>
-
-
-
+-->
 
 {% endblock %}

@@ -85,7 +85,7 @@
 <p><br><p>
     <!-- this is the results table or just a bar -->
     <div class="row">
-        <div class="table-responsive col-md-6"> 
+        <div class="table-responsive col-md-6">
             {% block table %}
             {% endblock %}
         </div>
@@ -107,20 +107,19 @@
 <!-- <a href="http://www.friendyourvote.com/testlogin.html">testlogin</a> -->
               
 </div>
-<script src="http://code.jquery.com/jquery.min.js"></script> 
-<script src="/static/list.js"></script>
+<!--<script src="http://code.jquery.com/jquery.min.js"></script> -->
 <script src="/static/jquery-1.11.1.min.js"></script>
 <script src="/static/jquery.dataTables.min.js"></script>
 <link href="/static/jquery.dataTables.css" rel="stylesheet">
 <link href="/static/dataTables.bootstrap.js">
+<script src="/static/list.js"></script>
+{% load eztables %}
 <script>
 $(document).ready(function() {
-    $('#example').dataTable();
-} );
-</script>
-<script>
-$(document).ready(function() {
-    $('#id_list_table').dataTable();
+    $('#id_list_table').dataTable({
+"order": [[ 0, "desc" ]],
+ "columnDefs": [{ "visible": false, "targets": [3] }]
+    });
 } );
 </script>
 
