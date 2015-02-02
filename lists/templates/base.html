@@ -65,14 +65,18 @@
                <img alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
               <!-- <img border="0" alt="friends list" src="/static/voter.jpg" width="300" ><br> this works fine on the server-->
              </a>
-               <p><br><p>
-                <button type="danger" class="btn btn-default"></button>
-                  <a href="logout_view">Logout {{user.username }}</a>
+               <p><br>
+                <button type="button" class="btn btn-default"><a href="logout_view">Logout {{user.username }}</a></button>
+                  
           {% else %}
-             <p><br><p><br><p><br><p><br>
              {% load staticfiles %}
+                  <br><p>
              <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">
-             <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>
+               <img border="0" alt="twitter login" src="{% static "Twitter_circle.png" %}" width="200" ><br>
+               <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>
+            <!-- 
+             <p><br><p><br><p><br><p><br>
+                 <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>-->
              </a>
           {% endif %}
         </div>
@@ -105,6 +109,21 @@
 </div>
 <script src="http://code.jquery.com/jquery.min.js"></script> 
 <script src="/static/list.js"></script>
+<script src="/static/jquery-1.11.1.min.js"></script>
+<script src="/static/jquery.dataTables.min.js"></script>
+<link href="/static/jquery.dataTables.css" rel="stylesheet">
+<link href="/static/dataTables.bootstrap.js">
+<script>
+$(document).ready(function() {
+    $('#example').dataTable();
+} );
+</script>
+<script>
+$(document).ready(function() {
+    $('#id_list_table').dataTable();
+} );
+</script>
+
 </body>
 
 </html>

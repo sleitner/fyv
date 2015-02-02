@@ -12,8 +12,8 @@
 <!--         <th>#</th> -->
         <th> voting likelihood </th>
         <th> name </th>
-        <th> birth date </th>
         <th> location </th>
+        <th> birth date </th>
         <th> voting history </th> 
         <th> tweet </th> 
         {% for voter in list.voter_set.all %}
@@ -34,15 +34,17 @@
            {% else %}
              <td> {{ voter.firstname }} {{ voter.middlename }} {{ voter.lastname }}</td> 
            {% endif %}
-           <td> {{ voter.DOB }} </td>
            <td> {{ voter.city }}, NY {{ voter.zip }} </td>
-           <td> {{ voter.G2014 }} </td>
-         <!--  <td> {{ voter.lastvote }} </td> -->
-           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20" class="twitter-hashtag-button" data-size="large" data-related="SamNLeitner">Tweet #friendyourvote</a>
-             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+           <td> {{ voter.DOB }} </td>
+           <td> {{ voter.G2014 }}, {{ voter.G2012 }}, {{ voter.G2010 }}, {{ voter.G2008 }}
            </td>
+   <!--       <td> {{ voter.lastvote }} </td> -->
+           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20" class="twitter-hashtag-button" data-related="SamNLeitner">Tweet #friendyourvote</a>
+           </td>
+
           </tr>
         {% endfor %}
+             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     </table>
 
     {% if list.owner %}
@@ -50,4 +52,68 @@
     {% endif %}
 {% endblock %}
 {% block extra_content %}
+
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+ 
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+ 
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Brenden Wagner</td>
+                <td>Software Engineer</td>
+                <td>San Francisco</td>
+                <td>28</td>
+                <td>2011/06/07</td>
+                <td>$206,850</td>
+            </tr>
+            <tr>
+                <td>Fiona Green</td>
+                <td>Chief Operating Officer (COO)</td>
+                <td>San Francisco</td>
+                <td>48</td>
+                <td>2010/03/11</td>
+                <td>$850,000</td>
+            </tr>
+            <tr>
+                <td>Shou Itou</td>
+                <td>Regional Marketing</td>
+                <td>Tokyo</td>
+                <td>20</td>
+                <td>2011/08/14</td>
+                <td>$163,000</td>
+            </tr>
+         </tr>
+        </tbody>
+    </table>
+
+
+
+
 {% endblock %}
