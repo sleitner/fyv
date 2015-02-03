@@ -11,12 +11,19 @@ def date8dig_to_string(date):
     day=date[6:8]
     return month+'/'+day+'/'+yr
 
+def checkreg(regdate,d):
+    for t in ['P','G']:
+        for yr in range(2003,2015): 
+            if yr < regdate//10000:
+                d[t+str(yr)] = -1
+
 class List(models.Model):
     def get_absolute_url(self):
         return reverse('view_list', args=[self.id])
     @staticmethod
     def create_ny_voter(d,prob,list_):
-            Voter.objects.create(
+        checkreg(d['regdate'],d)
+        Voter.objects.create(
                     lastname = (d['lastname'] or '').title(),
                     firstname = (d['firstname'] or '').title(),
                     middlename = (d['middlename'] or '').title(),

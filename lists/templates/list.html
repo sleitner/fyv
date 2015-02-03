@@ -3,45 +3,87 @@
 {% block header_text %}
 {% endblock %}
 
-{% block list_form %}<a href="/">new search</a>{% endblock %}
-
+{% block list_form %}
+<h2>Registered Voters</h2>
+The table lists registered voters in New York State, with rows colored by voting likelihood. N/A indicates elections before the voter was locally registered. The table is searchable by birthdate (xx/xx/xxxx), but birthdate is not shown to protect voter privacy.
+</div>
+<div class="col-lg-6">
+<br><br><br>
+<span class="label label-success">>90%</span> volunteer 
+<span class="label label-info">75%-90%</span> likely 
+<span class="label label-warning">25%-75%</span> mobilizable 
+<span class="label label-danger"><25%</span> unlikely
+<br>
+<a href="/">restart search</a>
+</div>
+{% endblock %}
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
-
 {% block table %}
 <br>
 <table id="id_list_table" class="table table-hover table-bordered ">
       <thead>
         <tr> 
-          <th> voting likelihood </th>
-          <th> name </th>
-          <th> location </th>
-          <th> birth date </th>
-          <th> voting history </th> 
-          <th> tweet </th> 
+          <th rowspan="2" style="vertical-align:middle;"> voting likelihood </th>
+          <th rowspan="2" style="vertical-align:middle;"> name </th>
+          <th rowspan="2" style="vertical-align:middle;"> location </th>
+          <th rowspan="2" style="vertical-align:middle;"> birth date </th>
+          <th colspan="4" style="vertical-align:middle;"><center> voting history </center></th> 
+          <th rowspan="2" style="vertical-align:middle;"> contact </th> 
+        </tr>
+        <tr> 
+          <th>2014</th><th>2012</th><th>2010</th><th>2008</th>
         </tr>
       </thead>
       <tbody>
         {% for voter in list.voter_set.all %}
-          {% if voter.prob > 90 %}
+          {% if voter.prob > 89.5 %}
           <tr class="success">
-          {% elif voter.prob > 75 %}
+          {% elif voter.prob > 74.5 %}
           <tr class="info">
-          {% elif voter.prob > 25  %}
+          {% elif voter.prob > 24.5  %}
           <tr class="warning">
           {% else %}
           <tr class="danger">
            {% endif %}
+
+
            <!--<td> {{ forloop.counter }} </td> -->
            <td> <center>{{ voter.prob|floatformat:"0"  }}% </center></td>
-           {% if voter.middlename == None %}
-             <td> {{ voter.firstname }} {{ voter.lastname }}</td> 
-           {% else %}
              <td> {{ voter.firstname }} {{ voter.middlename }} {{ voter.lastname }}</td> 
-           {% endif %}
            <td> {{ voter.city }}, NY {{ voter.zip }} </td>
-           <td> {{ voter.DOB }} </td>
-           <td> {{ voter.G2014 }}, {{ voter.G2012 }}, {{ voter.G2010 }}, {{ voter.G2008 }}</td>
-           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20"  data-related="SamNLeitner">Tweet #friendyourvote</a> <!--class="twitter-hashtag-button"-->
+           <td>{{ voter.DOB }}</td>
+
+           {% if voter.G2014 == 1 %}
+               <td>  ✓ </td>
+           {% elif voter.G2014 == 0 %}
+               <td> - </td>
+           {% elif voter.G2014 == -1 %}
+               <td> N/A </td>
+           {% endif %}
+           {% if voter.G2012 == 1 %}
+               <td> ✓ </td>
+           {% elif voter.G2012 == 0 %}
+               <td> - </td>
+           {% elif voter.G2012 == -1 %}
+               <td> N/A </td>
+           {% endif %}
+           {% if voter.G2010 == 1 %}
+               <td> ✓ </td>
+           {% elif voter.G2010 == 0 %}
+               <td> - </td>
+           {% elif voter.G2010 == -1 %}
+               <td> N/A </td>
+           {% endif %}
+           {% if voter.G2008 == 1 %}
+               <td> ✓ </td>
+           {% elif voter.G2008 == 0 %}
+               <td> - </td>
+           {% elif voter.G2008 == -1 %}
+               <td> N/A </td>
+           {% endif %}
+
+
+           <td> <a href="https://twitter.com/intent/tweet?button_hashtag=friendyourvote&text=placeholder%20for%20a%20direct%20message%20"  data-related="SamNLeitner">Tweet @ </a> <!--class="twitter-hashtag-button"-->
            </td>
 
           </tr>

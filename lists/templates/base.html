@@ -32,12 +32,11 @@
           </ul>
         </div><!--/.nav-collapse -->
     </nav>
-<p><br><p><br>
     <!-- # this is the container for the form -->
 
       <div class="row marketing">
         <div class="col-lg-6">
-                <h2>{% block header_text %}{% endblock %}</h2>
+          <h2>{% block header_text %}{% endblock %}</h2>
                 {% block list_form %}
                 <form class="form-inline" role="form" method="POST" action="{% block form_action %}{% endblock %}">
                   <div class="form-group">
@@ -103,7 +102,7 @@
                data-show-faces="true">
             </div>
     </div>
-<center><a href="http://www.friendyourvote.com/motivation.html">Motivation</a>  |  <a href="http://www.friendyourvote.com/analytics.html">Analytics</a>  |  <a href="http://www.friendyourvote.com/FAQ.html">FAQ</a>  |  <a href="http://www.samleitner.com">Author</a></center>
+<center><a href="http://www.friendyourvote.com/motivation.html">Motivation</a>  |  <a href="http://www.friendyourvote.com/analytics.html">Analytics</a>  |  <a href="http://www.friendyourvote.com/FAQ.html">FAQ</a>  |  <a href="http://www.samleitner.com">Author</a></center><br><p><br>
 <!-- <a href="http://www.friendyourvote.com/testlogin.html">testlogin</a> -->
               
 </div>
@@ -118,7 +117,10 @@
 $(document).ready(function() {
     $('#id_list_table').dataTable({
 "order": [[ 0, "desc" ]],
- "columnDefs": [{ "visible": false, "targets": [3] }]
+"columnDefs": [{ "visible": false, "targets": [3] }],
+"pageLength": 200,
+"paging": false
+
     });
 } );
 </script>
