@@ -23,15 +23,15 @@ class List(models.Model):
                     suffix = d['suffix'],
                     city = (d['city'] or '').title(),
                     zip = d['zip'],
-                    zip4 = d['zip4'],
+                  #  zip4 = d['zip4'],
                     DOB = date8dig_to_string(d['DOB']),
                     gender = d['gender'],
                     party = d['party'],
                     countycode = d['countycode'],
                     legdistrict = d['legdistrict'],
                     towncity = (d['towncity'] or '').title(),
-                    ward = d['ward'],
-                    congressdistrict = d['congressdistrict'],
+               #     ward = d['ward'],
+                    #congressdistrict = d['congressdistrict'],
                     lastvote = date8dig_to_string(d['lastvote']),
                     regdate = date8dig_to_string(d['regdate']),
                     P2003 = d['P2003'],
@@ -58,7 +58,7 @@ class List(models.Model):
                     G2012 = d['G2012'],
                     G2013 = d['G2013'],
                     G2014 = d['G2014'],
-                    nyid = d['nyid'],
+#                    nyid = d['nyid'],
                     prob=prob,
                     list=list_, 
                     )
@@ -140,15 +140,15 @@ class Voter(models.Model):
     suffix = models.CharField(default='', max_length=3, null=True)
     city = models.CharField(default='', max_length=100, null=True)
     zip = models.IntegerField(default='0', null=True)
-    zip4 = models.IntegerField(default='0', null=True)
+    #zip4 = models.IntegerField(default='0', null=True)
     DOB = models.CharField(default='', max_length=20, null=True)
     gender = models.CharField(default='', max_length=3)
     party = models.CharField(default='', max_length=100)
     countycode = models.IntegerField(default='0', null=True)
     legdistrict = models.IntegerField(default='0', null=True)
     towncity = models.CharField(default='', max_length=100, null=True)
-    ward = models.IntegerField(default='0', null=True)
-    congressdistrict = models.IntegerField(default='0', null=True)
+    #ward = models.IntegerField(default='0', null=True)
+    #congressdistrict = models.IntegerField(default='0', null=True)
     lastvote =  models.CharField(default='', max_length=20, null=True)
     regdate = models.CharField(default='', max_length=20, null=True)
     P2003 = models.IntegerField(default='0')
@@ -175,7 +175,7 @@ class Voter(models.Model):
     G2012 = models.IntegerField(default='0')
     G2013 = models.IntegerField(default='0')
     G2014 = models.IntegerField(default='0')
-    nyid = models.IntegerField(default='0')
+    #nyid = models.IntegerField(default='0')
     prob = models.FloatField(default='-1.0')
     list = models.ForeignKey(List, default=None)
     #person = models.ForeignKey(Person, default=None)

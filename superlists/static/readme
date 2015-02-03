@@ -1,0 +1,5 @@
+this exists so that 
+./manage.py collectstatic
+can be performed to move static files into the STATIC_ROOT directory
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+from the STATIC_DIRFILES used in tests 
