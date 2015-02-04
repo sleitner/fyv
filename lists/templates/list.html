@@ -5,16 +5,17 @@
 
 {% block list_form %}
 <h2>Registered Voters</h2>
-The table lists registered voters in New York State, with rows colored by voting likelihood. N/A indicates elections before the voter was locally registered. The table is searchable by birthdate (xx/xx/xxxx), but birthdate is not shown to protect voter privacy.
+The table below lists registered voters in New York State, with rows colored by expected probability of participating in the 2016 presidential election. N/A indicates elections before the voter was locally registered. The table is searchable by birthdate (xx/xx/xxxx), but birthdate is not shown to protect voter privacy.
 </div>
 <div class="col-lg-6">
 <br><br><br>
-<span class="label label-success">>90%</span> volunteer 
-<span class="label label-info">75%-90%</span> likely 
-<span class="label label-warning">25%-75%</span> mobilizable 
-<span class="label label-danger"><25%</span> unlikely
+Note that predicted likelihoods are based on a voters entire history, including election data not displayed in the table. The data is subject to updates to 2014 turnout.<br>
+<span class="label label-success">>75%</span> likely voter
+<!--<span class="label label-info">75%-90%</span> likely -->
+<span class="label label-warning">25%-75%</span> mobilizable voter
+<span class="label label-danger"><25%</span> unlikely voter
 <br>
-<a href="/">restart search</a>
+<h3><a href="/">restart search</a></h3>
 </div>
 {% endblock %}
 {% block form_action %}{% url 'view_list' list.id %}{% endblock %}
@@ -39,7 +40,7 @@ The table lists registered voters in New York State, with rows colored by voting
           {% if voter.prob > 89.5 %}
           <tr class="success">
           {% elif voter.prob > 74.5 %}
-          <tr class="info">
+          <tr class="success"> <!--info-->
           {% elif voter.prob > 24.5  %}
           <tr class="warning">
           {% else %}

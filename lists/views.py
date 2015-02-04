@@ -19,6 +19,8 @@ def testlogin(request):
     return render(request, 'testlogin.html')
 def input(request):
     return render(request, 'input.html')
+def slides(request):
+    return render(request, 'slides.html')
 #######^junk
 
 def new_list(request):
