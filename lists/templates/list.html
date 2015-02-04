@@ -32,7 +32,7 @@ Note that predicted likelihoods are based on a voters entire history, including 
           <th rowspan="2" style="vertical-align:middle;"> contact </th> 
         </tr>
         <tr> 
-          <th>2014</th><th>2012</th><th>2010</th><th>2008</th>
+          <th>2014</th><th>2013</th><th>2012</th><th>2011</th>
         </tr>
       </thead>
       <tbody>
@@ -61,6 +61,13 @@ Note that predicted likelihoods are based on a voters entire history, including 
            {% elif voter.G2014 == -1 %}
                <td> N/A </td>
            {% endif %}
+           {% if voter.G2013 == 1 %}
+               <td> ✓ </td>
+           {% elif voter.G2013 == 0 %}
+               <td> - </td>
+           {% elif voter.G2013 == -1 %}
+               <td> N/A </td>
+           {% endif %}
            {% if voter.G2012 == 1 %}
                <td> ✓ </td>
            {% elif voter.G2012 == 0 %}
@@ -68,18 +75,11 @@ Note that predicted likelihoods are based on a voters entire history, including 
            {% elif voter.G2012 == -1 %}
                <td> N/A </td>
            {% endif %}
-           {% if voter.G2010 == 1 %}
+           {% if voter.G2011 == 1 %}
                <td> ✓ </td>
-           {% elif voter.G2010 == 0 %}
+           {% elif voter.G2011 == 0 %}
                <td> - </td>
-           {% elif voter.G2010 == -1 %}
-               <td> N/A </td>
-           {% endif %}
-           {% if voter.G2008 == 1 %}
-               <td> ✓ </td>
-           {% elif voter.G2008 == 0 %}
-               <td> - </td>
-           {% elif voter.G2008 == -1 %}
+           {% elif voter.G2011 == -1 %}
                <td> N/A </td>
            {% endif %}
 
