@@ -86,7 +86,6 @@ class List(models.Model):
 
     @staticmethod
     def create_new(item_firstname, item_lastname, item_zipcode=''):
-        print('heresam',item_firstname, item_lastname)
         list_ = List.objects.create()
         person_ = Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
         # find_nearby_zips(item_zipcode)
