@@ -71,9 +71,14 @@
           {% else %}
              {% load staticfiles %}
                   <br><p>
+            <center>
              <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">
                <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>
-               <img border="0" alt="twitter login" src="{% static "Twitter_circle.png" %}" width="200" ><br>
+               <img border="0" alt="twitter login" src="{% static "Twitter_circle.png" %}" width="150" ><br>
+               example user: friendyourvote, 4rendurv0t
+            </center>
+               
+          
             <!-- 
              <p><br><p><br><p><br><p><br>
                  <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>-->
