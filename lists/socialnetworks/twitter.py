@@ -41,9 +41,12 @@ def get_twitter_friends(request):
     # Iterate through all of the authenticated user's friends
     #http://tweepy.readthedocs.org/en/v3.1.0/code_snippet.html
     friend_props = [] # just name and location now
-    for friend in tweepy.Cursor(api.friends).items():
-        # Process the friend here
-        prop = process_friend(friend)
-        if prop:
-            friend_props.append(prop)
+    try:
+        for friend in tweepy.Cursor(api.friends).items():
+            # Process the friend here
+            prop = process_friend(friend)
+            if prop:
+                friend_props.append(prop)
+    except tweepy.TweepError as e:
+        print(e.message[0]['code'])
     return friend_props
