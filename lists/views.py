@@ -46,10 +46,11 @@ def new_member_list(request):
         return render(request, 'home.html')
     list_ = ''
     for tfriend in twitter_friends_list:
-        list_ = List.create_new_twittNY(item_firstname=tfriend['firstname'],
-                                item_lastname=tfriend['lastname'],
+        list_ = List.create_new_twitt(tfriend['username'],
+                                tfriend['firstname'],
+                                tfriend['lastname'],
                                 item_zipcode='', 
-                                list_=list_
+                                list_=list_,
                                 )
     return render(request, 'list.html', {'list': list_})
 

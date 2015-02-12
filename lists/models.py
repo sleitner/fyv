@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from lists.queryvoter import query
 from lists.queryvoter import query_cols
+#from django.contrib.auth import get_user_model
+#User = get_user_model()
 
 def date8dig_to_string(date):
     date=str(date)
@@ -21,23 +23,22 @@ class List(models.Model):
     def get_absolute_url(self):
         return reverse('view_list', args=[self.id])
     @staticmethod
-    def create_ny_voter(d,prob,list_):
+    def create_ny_voter(d, prob,list_):
         checkreg(d['regdate'],d)
         Voter.objects.create(
+                    username = d['username'],
                     lastname = (d['lastname'] or '').title(),
                     firstname = (d['firstname'] or '').title(),
                     middlename = (d['middlename'] or '').title(),
                     suffix = d['suffix'],
                     city = (d['city'] or '').title(),
                     zip = d['zip'],
-                  #  zip4 = d['zip4'],
                     DOB = date8dig_to_string(d['DOB']),
                     gender = d['gender'],
                     party = d['party'],
                     countycode = d['countycode'],
                     legdistrict = d['legdistrict'],
                     towncity = (d['towncity'] or '').title(),
-               #     ward = d['ward'],
                     #congressdistrict = d['congressdistrict'],
                     lastvote = date8dig_to_string(d['lastvote']),
                     regdate = date8dig_to_string(d['regdate']),
@@ -72,15 +73,16 @@ class List(models.Model):
 
 
     @staticmethod
-    def create_new_twittNY(item_firstname, item_lastname, item_zipcode='', list_=''):
+    def create_new_twitt(username, item_firstname, item_lastname, item_zipcode='', list_=''):
         if not list_:
             list_ = List.objects.create()
-            #this should be the username for twitter list!
+            #this should be the username for authenticated User above (not friend)!
             person_ = Person.objects.create(firstname=item_firstname, lastname=item_lastname, list=list_)
         # find_nearby_zips(item_zipcode)
         (cols,rows,prob) = query(item_firstname, item_lastname, item_zipcode)
         for i,row in enumerate(rows):
             d = dict(zip(cols,row))
+            d['username']=username
             List.create_ny_voter(d,prob[i],list_)
         return list_
 
@@ -120,6 +122,7 @@ class List(models.Model):
         elif state == 'newyork':
             for i,row in enumerate(rows):
                 d = dict(zip(cols,row))
+                d['username']=''
                 List.create_ny_voter(d,prob[i],list_)
             
         return list_
@@ -132,29 +135,23 @@ class Person(models.Model):
     zipcode = models.IntegerField(default=None, null=True)
     list = models.ForeignKey(List, default=None)
 
-    class Meta:
-        ordering = ('id',)
-       # unique_together = ('list', 'firstname')
-
     def __str__(self):
         return self.lastname
 
 class Voter(models.Model):
+    username = models.CharField(default='', max_length=100, null=True)
     lastname = models.CharField(default='', max_length=100, null=True)
     firstname = models.CharField(default='', max_length=100, null=True)
     middlename = models.CharField(default='', max_length=100, null=True)
     suffix = models.CharField(default='', max_length=3, null=True)
     city = models.CharField(default='', max_length=100, null=True)
     zip = models.IntegerField(default='0', null=True)
-    #zip4 = models.IntegerField(default='0', null=True)
     DOB = models.CharField(default='', max_length=20, null=True)
     gender = models.CharField(default='', max_length=3)
     party = models.CharField(default='', max_length=100)
     countycode = models.IntegerField(default='0', null=True)
     legdistrict = models.IntegerField(default='0', null=True)
     towncity = models.CharField(default='', max_length=100, null=True)
-    #ward = models.IntegerField(default='0', null=True)
-    #congressdistrict = models.IntegerField(default='0', null=True)
     lastvote =  models.CharField(default='', max_length=20, null=True)
     regdate = models.CharField(default='', max_length=20, null=True)
     P2003 = models.IntegerField(default='0')

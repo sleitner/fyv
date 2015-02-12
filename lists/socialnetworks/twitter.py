@@ -16,7 +16,7 @@ def process_friend(friend):
             not containsany(name[0]+name[-1]):
         firstname = name[0]
         lastname = name[-1]
-        return {'firstname':firstname,'lastname':lastname, 'location':friend.location}
+        return {'firstname':firstname,'lastname':lastname, 'location':friend.location, 'username':friend.screen_name}
     return 
 
 from django.conf import settings
