@@ -41,7 +41,11 @@ from lists.socialnetworks.twitter import get_twitter_friends
 from lists.models import List
 def new_member_list(request):
     context = {}
-    twitter_friends_list =  get_twitter_friends(request)
+    twitter_result =  get_twitter_friends(request)
+    if isinstance(twitter_result,str):
+        return render(request, 'twitter_error.html',{'err': twitter_result})
+    else:
+        twitter_friends_list = twitter_result
     if not request.user.is_authenticated():
         return render(request, 'home.html')
     list_ = ''
