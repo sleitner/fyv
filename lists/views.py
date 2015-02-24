@@ -12,8 +12,8 @@ def faq(request):
     return render(request, 'FAQ.html')
 def motivation(request):
     return render(request, 'motivation.html')
-def analytics(request):
-    return render(request, 'analytics.html')
+def modeling(request):
+    return render(request, 'modeling.html')
 #######junk
 def testlogin(request):
     return render(request, 'testlogin.html')
