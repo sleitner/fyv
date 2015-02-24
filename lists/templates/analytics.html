@@ -6,15 +6,17 @@
 {% block header_text %}{% endblock %}
 {% block middle_text %}
 
-<h2>Analytics</h2> <p>
+<h2>Voter likelihood modeling in New York State</h2> <p>
+Voting probabilities are calculated based on a regularized logistic regression performed on a random subset of 1 million voters, with features being the past ten years of voting. The model was fit on the 2014 midterm elections with K-fold cross-validation on 70% of that data; testing on the remaining 30% shows an area under the ROC curve of 0.85. Relative voter engagement is remarkably stable between elections so the model is also predictive (with similar success) of other midterm elections. 
+<p>
+Presidential turnout predictions and other details to come, or they are available on request.
+<p> 
+<h2>Other data stories</h2> <p>
 This section describes interesting properties of voting data. More to come.
 <p>
-
-
 <h4>Variables that were predictive of voting in 2012</h4> <p>
-By relating Census data to voter participation data at the zip code level, we can associate electorate properties with voting likelihood. The plot below shows how strongly variables from the 2008-2012 American Community Survey are predictive of voter participation in the Ohio 2012 general election.
+By relating Census data to voter participation data at the zip code level, we can associate features of the electorate with voting likelihood. The plot below shows how strongly variables from the 2008-2012 American Community Survey are predictive of voter participation in the Ohio 2012 general election.
 <p>
-Details available on request.
 
 
 <style>
