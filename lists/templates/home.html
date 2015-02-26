@@ -2,5 +2,47 @@
 
 {% block header_text %}Search for a registered voter{% endblock %}
 
-{% block form_action %}{% url 'new_list' %}{% endblock %}
+{% block list_form %}
+<form class="form-inline" role="form" method="POST" action="{% url 'new_list' %}">
+  <div class="form-group">
+    {{ form.firstname }}<br>
+    {{ form.lastname }}<br>
+    {{ form.zipcode }}<br>
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="form-group has-error">
+      <div class="help-block">{{ form.firstname.errors }}</div>
+      <div class="help-block">{{ form.lastname.errors }}</div>
+      <div class="help-block">{{ form.zipcode.errors }}</div>
+    </div>
+    {% endif %}
+  </div>
+  <br><p>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+<div class="col-lg-6">
+  {% if user and not user.is_anonymous %}
+             {% load staticfiles %}
+  <a href="/new_member_list">
+    <h2>See your New York network</h2>
+    <img alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
+    <!-- <img border="0" alt="friends list" src="/static/voter.jpg" width="300" ><br> this works fine on the server-->
+  </a>
+  <p><br>
+    <button type="button" class="btn btn-default"><a href="logout_view">Logout {{user.username }}</a></button>
+    
+    {% else %}
+    {% load staticfiles %}
+    <br><p>
+            <center>
+              <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">
+                <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>
+                <img border="0" alt="twitter login" src="{% static "Twitter_circle.png" %}" width="150" ><br>
+             </a>
+              example user: friendyourvote   4rendurv0t
+            </center>
+            {% endif %}
+</div>
 
+{% endblock %}

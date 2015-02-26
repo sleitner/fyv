@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div class="container">
 
-    <!-- # this is the top bar -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- # this is the top bar -->
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -26,102 +26,55 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active">
-              <li><a href="http://www.friendyourvote.com/motivation.html">Motivation</a></li>  
-              <li><a href="http://www.friendyourvote.com/modeling.html">Modeling</a></li>  
-              <li><a href="http://www.friendyourvote.com/FAQ.html">FAQ</a></li>  
-             <!--  <li><a href="http://www.friendyourvote.com/slides.html">Slides</a></li>  -->
-             <li><a href="http://www.samleitner.com">Author</a></li> 
+            <li><a href="http://www.friendyourvote.com/motivation.html">Motivation</a></li>  
+            <li><a href="http://www.friendyourvote.com/modeling.html">Modeling</a></li>  
+            <li><a href="http://www.friendyourvote.com/FAQ.html">FAQ</a></li>  
+            <!--  <li><a href="http://www.friendyourvote.com/slides.html">Slides</a></li>  -->
+            <li><a href="http://www.samleitner.com">Author</a></li> 
           </ul>
         </div><!--/.nav-collapse -->
-    </nav>
-
-    <!-- # this is the container for the form -->
+      </nav>
+      
       <div class="row marketing">
+        <!-- # this is the container for the form -->
         <div class="col-lg-6">
           <h2>{% block header_text %}{% endblock %}</h2>
-                {% block list_form %}
-                <form class="form-inline" role="form" method="POST" action="{% block form_action %}{% endblock %}">
-                  <div class="form-group">
-                    {{ form.firstname }}<br>
-                    {{ form.lastname }}<br>
-                    {{ form.zipcode }}<br>
-                    {% csrf_token %}
-                    {% if form.errors %}
-                        <div class="form-group has-error">
-                            <div class="help-block">{{ form.firstname.errors }}</div>
-                            <div class="help-block">{{ form.lastname.errors }}</div>
-                            <div class="help-block">{{ form.zipcode.errors }}</div>
-                        </div>
-                    {% endif %}
-                  </div>
-                  <br><p>
-                <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+          {% block list_form %}
+          {% endblock %}
         </div>
-        <div class="col-lg-6">
-          {% if user and not user.is_anonymous %}
-             {% load staticfiles %}
-             <a href="/new_member_list">
-               <h2>See your New York network</h2>
-               <img alt="friends list" src="{% static "voter.jpg" %}" width="300" ><br>
-              <!-- <img border="0" alt="friends list" src="/static/voter.jpg" width="300" ><br> this works fine on the server-->
-             </a>
-               <p><br>
-                <button type="button" class="btn btn-default"><a href="logout_view">Logout {{user.username }}</a></button>
-                  
-          {% else %}
-             {% load staticfiles %}
-                  <br><p>
-            <center>
-             <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">
-               <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>
-               <img border="0" alt="twitter login" src="{% static "Twitter_circle.png" %}" width="150" ><br>
-               
-          
-            <!-- 
-             <p><br><p><br><p><br><p><br>
-                 <img border="0" alt="twitter login" src="{% static "sign-in-with-twitter-gray.png" %}" width="200" ><br>-->
-             </a>
-               example user: friendyourvote   4rendurv0t
-            </center>
-          {% endif %}
-        </div>
-      {% endblock %}
-      </div>
-<p><br><p>
-    <!-- this is the results table or just a bar -->
-    <div class="row">
-        <div class="table-responsive col-md-6">
+        <p><br><p>
+        <!-- this is the results table or just a bar -->
+        <div class="row">
+          <div class="table-responsive col-md-6">
             {% block table %}
             {% endblock %}
+          </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
             {% block extra_content %}
             {% endblock %}
-        </div>
-            <div
+          </div>
+          <div
                class="fb-like"
                data-share="true"
                data-width="400"
                data-show-faces="true">
-            </div>
+          </div>
+        </div>
+           
+        <div align="right">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="Are your votes are lonely? ">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> 
+        </div>
+
+        <center>
+          <a href="http://www.friendyourvote.com/motivation.html">Motivation</a>  |  <a href="http://www.friendyourvote.com/modeling.html">Modeling</a>  |  <a href="http://www.friendyourvote.com/FAQ.html">FAQ</a>  |  <a href="http://www.samleitner.com">Author</a>
+        </center>
+        <br><p><br>
     </div>
 
-
-           
-<div align="right">
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="Are your votes are lonely? ">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> 
-</div>
-<center>
- <a href="http://www.friendyourvote.com/motivation.html">Motivation</a>  |  <a href="http://www.friendyourvote.com/modeling.html">Modeling</a>  |  <a href="http://www.friendyourvote.com/FAQ.html">FAQ</a>  |  <a href="http://www.samleitner.com">Author</a></center><br><p><br>
-<!-- <a href="http://www.friendyourvote.com/testlogin.html">testlogin</a> -->
-              
-</div>
-<!--<script src="http://code.jquery.com/jquery.min.js"></script> -->
 <script src="/static/jquery-1.11.1.min.js"></script>
 <script src="/static/jquery.dataTables.min.js"></script>
 <link href="/static/jquery.dataTables.css" rel="stylesheet">
