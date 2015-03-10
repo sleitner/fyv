@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^motivation.html', 'lists.views.motivation', name='motivation'),
     url(r'^modeling.html', 'lists.views.modeling', name='modeling'),
     url(r'^testlogin.html', 'lists.views.testlogin', name='testlogin'),
-    url(r'^input.html', 'lists.views.input', name='input'),
+    url(r'^overview.html', 'lists.views.overview', name='overview'),
     url(r'^lists/', include('lists.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

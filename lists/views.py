@@ -17,8 +17,8 @@ def modeling(request):
 #######junk
 def testlogin(request):
     return render(request, 'testlogin.html')
-def input(request):
-    return render(request, 'input.html')
+def overview(request):
+    return render(request, 'overview.html')
 def slides(request):
     return render(request, 'slides.html')
 #######^junk

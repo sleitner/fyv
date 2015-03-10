@@ -1,11 +1,29 @@
 {% extends 'basenoj.html' %}
 
 {% block header_text %}{% endblock %}
+{% load staticfiles %}
 {% block middle_text %}
 
 <h2>Motivation</h2><p>
-Voter turnout is low in the US. Midterm elections typically draw about 40 percent of the eligible public and in 2014 <a href=http://www.washingtonpost.com/blogs/post-politics/wp/2014/11/10/voter-turnout-in-2014-was-the-lowest-since-wwii/>turnout was only 36.4 percent</a> nationally, <a href=http://www.nytimes.com/2014/11/12/opinion/the-worst-voter-turnout-in-72-years.html>down to 28.8% in New York State</a>. Motivation through social networks and social pressure in general has been shown to substantially <a href="http://isps.yale.edu/research/publications/isps08-001#.VGGBB1PF-bQ"><it>motivate voting</a>. Share this app and help leverage social pressure to increase civic engagement in our democracy.
+<h4>Low turnout</h4><p>
+Voter turnout is low in the US. Midterm elections typically draw about 40 percent of the eligible public and in 2014 <a href=http://www.washingtonpost.com/blogs/post-politics/wp/2014/11/10/voter-turnout-in-2014-was-the-lowest-since-wwii/>turnout was only 36.4 percent</a> nationally, <a href=http://www.nytimes.com/2014/11/12/opinion/the-worst-voter-turnout-in-72-years.html>down to around 30% in New York State</a>. For New York, this is just another data point in a disturbuing 40 year decline shown in the plot below.
+
+<p><br><p>
+<img border="0" alt="twitter login" src="{% static "demoimages/demo_27_sam.002.jpg" %}" width="500" >
+<p><br><p>
+
+<h4>Searching for a solution</h4><p>
+Many common methods for get out the vote have a small effect on turnout likelihood. A/B testing has demonstrated that campaign email has a negligible effect, while mailers or door hangers have a measurable but tiny impact. 
+On a per-event basis, the most effective tool campaigns have at their disposal is canvassing; that face-to-face social interaction increases turnout likelihood by over 20% on average. However, canvassing is expensive and time consuming. 
 <p>
+Political scientists have identified a cheap and similarly effective way to increase turnout related to <a href="http://isps.yale.edu/research/publications/isps08-001#.VGGBB1PF-bQ">social accountability</a>. 
+When voters are aware that their participation in elections is part of the public record, they feel accountable to their community, and become substantially more likely to turnout to vote.
+<p><br>
+<img border="0" alt="twitter login" src="{% static "demoimages/demo_27_sam.003.jpg" %}" width="500" >
+<p><br>
+
+The purpose of Friend Your Vote is to help you leverage this social accountability concept. By linking your online communities to publicly available voter data you can remind your contacts that voting matters to you, and that you'd like to engage them in the process.
+ 
 {% endblock %}
-{% block extra_content %}
-{% endblock %}
+{% block extra_content %}{% endblock %}
+
