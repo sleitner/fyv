@@ -8,20 +8,18 @@
 
 <h2>Voter modeling</h2> <p>
 
-This page describes the data and modeling that go into the voter likelihood result shown in the voter lookup tables.
-
+This page describes how data and models are used to produce the turn-out likelihood score shown in a voter look up table.
+<p>
 <h4>Voter data</h4> 
-Voter files are recorded by county officials, and then aggregated by secretary of state offices into statewide databases. Those databases can be obtained in the form of CSV files on CD (for a fee ranging from shipping cost, to more than $10,000). The fields for a given record include a voter's name, date of birth, gender, address, party affiliation, registration status, registration date, and an unstructured description of past election participation, among other things.
-<br>
-INSERT IMAGE OF UNSTRUCTURED FIELDS
-<p><br>
+Voter files are recorded by county officials, and then aggregated by secretary of state offices into statewide databases. Those databases can be obtained in the form of CSV files on CD for a fee ranging from the shipping cost, to more than $10,000. Some of the fields for a given record include a voter's name, date of birth, gender, address, party affiliation, registration status, registration date, and an unstructured description of past election participation.
+<p>
 
 <h4>Voter likelihood modeling</h4> <p>
-As a first step, we would like to use data in the the voter files themselves to model individual voter likelihood. 
-Voting probabilities are calculated based on a regularized logistic regression performed on a random subset of 1 million voters, with features being the past ten years of voting. The model was fit on the 2014 midterm elections with K-fold cross-validation on 70% of that data; testing on the remaining 30% shows an area under the ROC curve of 0.85. Relative voter engagement is remarkably stable between elections so the model is also predictive (with similar success) of other midterm elections. 
+<!--As a first step, we would like to use data in the the voter files themselves to model individual voter likelihood. -->
+Voting probabilities are calculated based on a regularized logistic regression performed on a random subset of 1 million voters, with features being the past ten years of voting. The model is fit on the 2014 midterm elections with K-fold cross-validation on 70% of that data; testing on the remaining 30% shows an area under the ROC curve of 0.85. Relative voter engagement is remarkably stable between elections so the model is also predictive (with similar success) of other midterm elections. 
 <p>
 Presidential turnout predictions and other details to come, or they are available on request.
-<p> <br>
+<p> 
 <h4>Variables that were predictive of voting in Ohio in 2012</h4> <p>
 By relating Census data to voter participation data at the zip code level, we can associate features of the electorate with voting likelihood. The plot below shows how strongly variables from the 2008-2012 American Community Survey are predictive of voter participation in the Ohio 2012 general election.
 <p>
@@ -142,6 +140,7 @@ d3.json('/static/cumulativeLineData.json', function(data) {
 });
 */
 </script>
+<!--
 <h2>Upcoming additions</h2> <p>
 {% load staticfiles %}
 <p><p><br>
@@ -172,7 +171,7 @@ Ohio (swing state) vs NY during presidential/midterm cycles.<br>
 <a href="http://electionmap.wamu.org/">Interactive map of voter likelihood</a> using:
 https://github.com/cmgiven/open-election-map and shape files<br>
 <p><br><p><br><p>
-
+-->
 
 {% endblock %}
 
